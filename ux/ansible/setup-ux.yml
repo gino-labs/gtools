@@ -1,0 +1,41 @@
+---
+- name: Setup UX preferences
+  hosts: localhost
+  become: false
+  gather_facts: true
+  connection: local
+  tasks:
+    - name: Set facts about user
+      set_fact:
+        u:
+          name: "{{ ansible_user_id }}"
+          home: "{{ ansible_user_dir }}"
+    - name: Create home .bashrc.d inclusion directory
+      file:
+        path: "{{ u.home }}/.bashrc.d"
+        state: directory
+        owner: "{{ u.name }}"
+        mode: 0644
+    
+    - name: Add bashrc inclusion logic
+      blockinfile:
+        block: |
+          if [ -d ~/.bashrc.d ]; then
+              for rc in ~/.bashrc.d/*; do
+                  if [ -f "$rc" ]; then
+                      . "$rc"
+                  fi
+              done
+          fi
+
+                
+
+      - name: Add bashrc template files
+
+      - name: Add vimrc template file
+      
+      - name: Create nvim configuration base directory
+
+    - name: Create nvim configuration sub-directories
+
+    - name: Add neovim template files and lua modules
