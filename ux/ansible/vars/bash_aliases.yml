@@ -1,0 +1,50 @@
+---
+ansi_prompts:
+  - user: "{{ bright_red }}"
+    host: "{{ bright_green }}"
+    cwd: "{{ bright_blue }}"
+    base: "{{ white }}"
+  - user: "{{ bright_cyan }}"
+    host: "{{ bright_magenta }}"
+    cwd: "{{ bright_yellow }}"
+    base: "{{ white }}"
+
+bash_aliases:
+  - alias: ll
+    cmd: ls -l
+    complete: no
+  - alias: la
+    cmd: ls -a
+    complete: no
+  - alias: apb
+    cmd: ansible-playbook
+    complete: yes
+  - alias: adoc
+    cmd: ansible-doc
+    complete: yes
+  - alias: acfg
+    cmd: ansible-config
+    complete: yes
+  - alias: avlt
+    cmd: ansible-vault
+    complete: yes
+  - alias: agal
+    cmd: ansible-galaxy
+    complete: yes
+  - alias: alint
+    cmd: ansible-lint
+    complete: yes
+  - alias:
+    cmd:
+    complete: yes
+  - alias:
+    cmd:
+    complete: yes
+  - alias:
+    cmd:
+    complete: yes
+  - alias:
+    cmd:
+    complete: yes
+
+

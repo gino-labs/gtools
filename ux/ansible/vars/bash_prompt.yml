@@ -1,0 +1,6 @@
+---
+prompt_variables:
+  - ""
+  
+
+ps1: "{{ prompt_assembly | join('') }}"
