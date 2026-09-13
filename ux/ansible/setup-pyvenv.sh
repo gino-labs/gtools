@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 
+cd "$(dirname -- ${BASH_SOURCE[0]})"
+
 if ! command -v python3 > /dev/null; then
   echo "Python3 unavailable..."
   exit 1
@@ -11,8 +13,9 @@ if [[ ! -d ".venv" ]]; then
 fi
 
 source .venv/bin/activate
-echo "Running pip installs"
+echo "Running pip install upgrade"
 python3 -m pip install -U pip
-echo "Installing ansible"
+
+echo "Pip installing ansible"
 python3 -m pip install ansible
 deactivate
