@@ -29,7 +29,6 @@
           fi
 
                 
-
       - name: Add bashrc template files
 
       - name: Add vimrc template file

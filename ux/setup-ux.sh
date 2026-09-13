@@ -13,7 +13,7 @@ else
   APB='./ansible/.venv/bin/ansible-playbook'
 fi
 
-./.venv/bin/ansible-playbook -c local -i "localhost," ansible/setup-ux.yml
+"$APB" -c local -i "localhost," ansible/setup-ux.yml
 
 
 

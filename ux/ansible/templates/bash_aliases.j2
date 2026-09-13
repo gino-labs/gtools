@@ -1,29 +1,20 @@
 #!/usr/bin/env bash
 
-# General
-alias ll="ls -l"
-alias la="ls -a"
-alias cls="clear && ls"
+# For alias to inherit tab completion
+inherit_completion() {
+  local src=$1
+  local dest=$2
 
-# Ansible
-alias apb="ansible-playbook"
-alias adoc="ansible-doc"
-alias acfg="ansible-config"
-alias avlt="ansible-vault"
-alias agal="ansible-galaxy"
-alias alint="ansible-lint"
+  local comp
+  comp=$(complete -p "$src") || return 1
+  eval "${comp% "$src"} $dest"
+}
 
-# Python
-alias python="python3"
-alias pypile="python3 -m py_compile"
+# Aliases
+{% for ba in bash_aliases %}
+alias {{ ba.alias }}='{{ ba.cmd }}'
+{% if ba.complete %}
+inherit_completion {{ ba.cmd.split()[0] }} {{ ba.alias }}
+{% endif %}
 
-# System
-alias sl="systemctl"
-alias jl="journalctl"
-alias vr="vim -R"
-
-alias arsync="rsync -havuHP --stats"
-
-# OSBuild Composer
-alias ccli="composer-cli"
-complete -F _composer_cli ccli
+{% endfor %}
