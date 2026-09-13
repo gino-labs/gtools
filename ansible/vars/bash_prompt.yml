@@ -1,6 +1,17 @@
 ---
-prompt_variables:
-  - ""
-  
 
-ps1: "{{ prompt_assembly | join('') }}"
+ps1_core:
+  - "{{ ansi_esc.format( [ansi.style.bold, ansi.style.italic, ansi.fg.bright_red] | join(';') }}{{ bash_esc.user }}"
+  - "{{ ansi_esc.format(ansi.fg.bright_white) }}@"
+  - "{{ ansi_esc.format(ansi.fg.bright_green) }}{{ bash_esc.host }}"
+  - "{{ ansi_esc.format(ansi.fg.bright_white) }}:"
+  - "{{ ansi_esc.format(ansi.fg.bright_blue) }}{{ bash_esc.cwd }}"
+  
+bash_prompts:
+  - name: RGB_PROMPT
+    parts:
+      - "$'{{ unicode._line }}'"
+  - name: CMY_PROMPT
+    parts:
+      - "{{  }}"
+
