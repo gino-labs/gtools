@@ -4,18 +4,24 @@
   become: false
   gather_facts: true
   connection: local
+  vars_files:
+    - vars/escape_sequences.yml
+    - vars/bash_prompts.yml
+    - vars/bash_aliases.yml
+  vars:
+    install_extra_funcs: true
   tasks:
     - name: Set facts about user
       set_fact:
         u:
-          name: "{{ ansible_user_id }}"
-          home: "{{ ansible_user_dir }}"
+          name: "{{ ansible_facts['user_id'] }}"
+          home: "{{ ansible_facts['user_dir'] }}"
     - name: Create home .bashrc.d inclusion directory
       file:
         path: "{{ u.home }}/.bashrc.d"
         state: directory
         owner: "{{ u.name }}"
-        mode: 0644
+        mode: 0700
     
     - name: Add bashrc inclusion logic
       blockinfile:
@@ -27,14 +33,30 @@
                   fi
               done
           fi
+        path: "{{ u.home }}/.bashrc"
+        state: present
 
                 
-      - name: Add bashrc template files
+    - name: Add bashrc template files
+      template:
+        src: templates/{{ item }}.j2
+        dest: "{{ u.home }}/.bashrc.d/{{ item }}"
+      loop:
+        - bash_prompt
+        - bash_aliases
+        - bash_functions
+        - bash_variables
 
-      - name: Add vimrc template file
-      
-      - name: Create nvim configuration base directory
+    - name: Create nvim configuration base directory
+      file:
+        path: "{{ u.name }}/.config/nvim"
+        state: directory
 
-    - name: Create nvim configuration sub-directories
-
-    - name: Add neovim template files and lua modules
+    - name: Add vimrc template file
+      template:
+        src: templates/vimrc.j2
+        dest: "{{ u.home }}/.vimrc"
+      loop:
+        - "{{ u.home }}/.vimrc"
+        - "{{ u.home }}/.config/nvim/init.vim"
+    

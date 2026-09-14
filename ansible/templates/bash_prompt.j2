@@ -2,13 +2,18 @@
 [[ $- != *i* ]] && return
 
 # Prompt Color Controls
-case $(( RANDOM % {{ bash_prompts | length }} )) in
+case $(( RANDOM % {{ bash_prompts | length }} + 1 )) in
   {% for prompt in bash_prompts %}
-  {{ prompt.index }}) 
-    SELECTED_PROMPT_NAME={{ prompt.name }}
-    SELECTED_PROMPT_STRING={{ prompt.parts | join('') }}
+  {{ loop.index }}) 
+    SELECTED_PROMPT_NAME='{{ prompt.name }}'
+    SELECTED_PROMPT_STRING='{{ prompt.parts | join('') }}'
     ;;
   {% endfor %}
+  *)
+    SELECTED_PROMPT_NAME='{{ bash_prompts[0]["name"] }}'
+    SELECTED_PROMPT_STRING='{{ bash_prompts[0]["parts"] | join('') }}'
+    ;;
+    
 esac
 
 PS1="$SELECTED_PROMPT_STRING"

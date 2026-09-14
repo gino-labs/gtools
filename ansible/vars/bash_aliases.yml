@@ -2,47 +2,47 @@
 aliases:
   - name: ll
     cmd: ls -l
-    complete: no
+    complete: false
   - name: la
     cmd: ls -a
-    complete: no
+    complete: false
   - name: rc
     cmd: echo $?
-    complete: no
+    complete: false
   - name: arsync
     cmd: rsync -havuHP --stat
-    complete: yes
+    complete: false
   - name: sl
     cmd: systemctl
-    complete: yes
+    complete: false
   - name: jl
     cmd: journalctl
-    complete: yes
+    complete: false
   - name: apb
     cmd: ansible-playbook
-    complete: yes
+    complete: false
   - name: adoc
     cmd: ansible-doc
-    complete: yes
+    complete: false
   - name: acfg
     cmd: ansible-config
-    complete: yes
+    complete: false
   - name: avlt
     cmd: ansible-vault
-    complete: yes
+    complete: false
   - name: agal
     cmd: ansible-galaxy
-    complete: yes
+    complete: false
   - name: alint
     cmd: ansible-lint
-    complete: yes
+    complete: false
   - name: python
     cmd: python3
-    complete: yes
+    complete: false
   - name: pypile
     cmd: python3 -m py_compile
-    complete: yes
+    complete: false
   - name: pyvenv
     cmd: python3 -m venv
-    complete: yes
+    complete: false
 
