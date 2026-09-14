@@ -1,34 +1,15 @@
 # Safegaurd for non-interactive shells
 [[ $- != *i* ]] && return
 
-# Cursor Style
-#printf '\e[1 q' # Shape
-#printf '\e]12;#D0D0D0\a' # Color
-
-# Box Drawing Unicodes
-horz_line=$'\u2500'
-vert_line=$'\u2502'
-right_arrow=$'\u25B7'
-right_tee=$'\u2524'
-lower_corner=$'\u256D'
-upper_corner=$'\u2570'
-delta=$'\u0394'
-
 # Prompt Color Controls
-case $(( RANDOM % {{ ansi_prompts | length )) in
-  {% for ansi in ansi_prompts %}
-  {{ ansi.index }}) 
-    user_ansi={{ ansi.user }}
-    host_ansi={{ ansi.host }}
-    cwd_ansi={{ ansi.cwd }}
-    base_ansi={{ ansi.base }}
+case $(( RANDOM % {{ bash_prompts | length }} )) in
+  {% for prompt in bash_prompts %}
+  {{ prompt.index }}) 
+    SELECTED_PROMPT_NAME={{ prompt.name }}
+    SELECTED_PROMPT_STRING={{ prompt.parts | join('') }}
     ;;
   {% endfor %}
 esac
 
-reset_ansi='\[\033[0m\]'
+PS1="$SELECTED_PROMPT_STRING"
 
-top_half="${base_ansi}${lower_corner}${right_tee}\A${vert_line}${user_ansi}\u${base_ansi}@${host_ansi}\h${base_ansi}:${cwd_ansi}\W${base_ansi}${vert_line}\n"
-bot_half="${reset_ansi}${upper_corner}${horz_line}${horz_line}${right_arrow} "
-
-PS1="${top_half}${bot_half}"

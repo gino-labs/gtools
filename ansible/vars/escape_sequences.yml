@@ -325,12 +325,13 @@ ansi:
     grey89: '254'
     grey93: '255'
 
-uni_esc:
-  horz_line: '\u2500'
-  vert_line: '\u2502'
-  right_arrow: '\u25B7'
-  right_tee: '\u2524'
-  lower_corner: '\u256D'
-  upper_corner: '\u2570'
-  delta: '\u0394'
+# Preprocess unicode escape sequences with double quotes
+unicode:
+  horizontal_line: "\u2500"
+  vertical_line: "\u2502"
+  right_arrow: "\u25B7"
+  right_tee: "\u2524"
+  lower_corner: "\u256D"
+  upper_corner: "\u2570"
+  delta: "\u0394"
   

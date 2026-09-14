@@ -9,17 +9,10 @@ gitm() {
     git push
 }
 
+{% if install_extra_funcs %}
 # Monitor Brightness
 set-brightness() {
   sudo ddcutil --display 1 setvcp 10 "$1"
   sudo ddcutil --display 2 setvcp 10 "$1"
 }
-
-manhtml() {
-  query="$1"
-  man -Thtml "$query" > "${query}.html" 2> /dev/null
-  if [[ -d /srv/www/man ]]; then
-    letter=${query:0:1}
-    mv "$query" "/srv/www/man/${letter^^}"
-  fi
-}
+{% endif %}

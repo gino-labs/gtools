@@ -11,10 +11,10 @@ inherit_completion() {
 }
 
 # Aliases
-{% for ba in bash_aliases %}
-alias {{ ba.alias }}='{{ ba.cmd }}'
-{% if ba.complete %}
-inherit_completion {{ ba.cmd.split()[0] }} {{ ba.alias }}
+{% for alias in aliases %}
+alias {{ alias.name }}='{{ alias.cmd }}'
+{% if alias.complete %}
+inherit_completion {{ alias.cmd }} {{ alias.name }}
 {% endif %}
 
 {% endfor %}

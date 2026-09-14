@@ -1,50 +1,48 @@
 ---
-ansi_prompts:
-  - user: "{{ bright_red }}"
-    host: "{{ bright_green }}"
-    cwd: "{{ bright_blue }}"
-    base: "{{ white }}"
-  - user: "{{ bright_cyan }}"
-    host: "{{ bright_magenta }}"
-    cwd: "{{ bright_yellow }}"
-    base: "{{ white }}"
-
-bash_aliases:
-  - alias: ll
+aliases:
+  - name: ll
     cmd: ls -l
     complete: no
-  - alias: la
+  - name: la
     cmd: ls -a
     complete: no
-  - alias: apb
+  - name: rc
+    cmd: echo $?
+    complete: no
+  - name: arsync
+    cmd: rsync -havuHP --stat
+    complete: yes
+  - name: sl
+    cmd: systemctl
+    complete: yes
+  - name: jl
+    cmd: journalctl
+    complete: yes
+  - name: apb
     cmd: ansible-playbook
     complete: yes
-  - alias: adoc
+  - name: adoc
     cmd: ansible-doc
     complete: yes
-  - alias: acfg
+  - name: acfg
     cmd: ansible-config
     complete: yes
-  - alias: avlt
+  - name: avlt
     cmd: ansible-vault
     complete: yes
-  - alias: agal
+  - name: agal
     cmd: ansible-galaxy
     complete: yes
-  - alias: alint
+  - name: alint
     cmd: ansible-lint
     complete: yes
-  - alias:
-    cmd:
+  - name: python
+    cmd: python3
     complete: yes
-  - alias:
-    cmd:
+  - name: pypile
+    cmd: python3 -m py_compile
     complete: yes
-  - alias:
-    cmd:
+  - name: pyvenv
+    cmd: python3 -m venv
     complete: yes
-  - alias:
-    cmd:
-    complete: yes
-
 

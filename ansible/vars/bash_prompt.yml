@@ -1,17 +1,28 @@
 ---
 
-ps1_core:
-  - "{{ ansi_esc.format( [ansi.style.bold, ansi.style.italic, ansi.fg.bright_red] | join(';') }}{{ bash_esc.user }}"
-  - "{{ ansi_esc.format(ansi.fg.bright_white) }}@"
-  - "{{ ansi_esc.format(ansi.fg.bright_green) }}{{ bash_esc.host }}"
-  - "{{ ansi_esc.format(ansi.fg.bright_white) }}:"
-  - "{{ ansi_esc.format(ansi.fg.bright_blue) }}{{ bash_esc.cwd }}"
-  
 bash_prompts:
   - name: RGB_PROMPT
     parts:
-      - "$'{{ unicode._line }}'"
+      - "{{ ansi_esc.format([ansi.style.bold, ansi.style.italic, ansi.fg.bright_white] | join(';')) }}"
+      - "{{ ansi_esc }}{{ unicode.lower_corner }}{{ unicode.vertical_line }}"
+      - "{{ ansi_esc.format( ansi.fg.bright_red | join(';') }}{{ bash_esc.user }}" # Bright red user
+      - "{{ ansi_esc.format(ansi.fg.bright_white) }}@"
+      - "{{ ansi_esc.format(ansi.fg.bright_green) }}{{ bash_esc.host }}" # Bright green host
+      - "{{ ansi_esc.format(ansi.fg.bright_white) }}:"
+      - "{{ ansi_esc.format(ansi.fg.bright_blue) }}{{ bash_esc.cwd }}" # Bright blue directory
+      - "{{ ansi_esc.format(ansi.fg.bright_white) }}{{ unicode.vertical_line }}{{ bash_esc.newline }}"
+      - "{{ unicode.upper_corner }}{{ unicode.horizontal_line }}"
+      - "{{ unicode.horizontal_line }}{{ unicode.right_arrow }} {{ ansi_esc.format(ansi.style.reset) }}"
   - name: CMY_PROMPT
     parts:
-      - "{{  }}"
+      - "{{ ansi_esc.format([ansi.style.bold, ansi.style.italic, ansi.fg.bright_white] | join(';')) }}"
+      - "{{ ansi_esc }}{{ unicode.lower_corner }}{{ unicode.vertical_line }}"
+      - "{{ ansi_esc.format( ansi.fg.bright_cyan | join(';') }}{{ bash_esc.user }}" # Bright cyan user
+      - "{{ ansi_esc.format(ansi.fg.bright_white) }}@"
+      - "{{ ansi_esc.format(ansi.fg.bright_magenta) }}{{ bash_esc.host }}" # Bright magenta host
+      - "{{ ansi_esc.format(ansi.fg.bright_white) }}:"
+      - "{{ ansi_esc.format(ansi.fg.bright_yellow) }}{{ bash_esc.cwd }}" # Bright yellow directory
+      - "{{ ansi_esc.format(ansi.fg.bright_white) }}{{ unicode.vertical_line }}{{ bash_esc.newline }}"
+      - "{{ unicode.upper_corner }}{{ unicode.horizontal_line }}"
+      - "{{ unicode.horizontal_line }}{{ unicode.right_arrow }} {{ ansi_esc.format(ansi.style.reset) }}"
 
