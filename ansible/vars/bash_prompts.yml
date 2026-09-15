@@ -5,12 +5,13 @@ bash_prompts:
     parts:
       - "{{ ansi_esc.format([ansi.style.bold, ansi.style.italic, ansi.fg.bright_white] | join(';')) }}"
       - "{{ unicode.lower_corner }}{{ unicode.vertical_line }}"
+      - "{{ bash_esc.time_hm }}{{ unicode.vertical_line }}"
       - "{{ ansi_esc.format(ansi.fg.bright_red) }}{{ bash_esc.user }}" # Bright red user
       - "{{ ansi_esc.format(ansi.fg.bright_white) }}@"
       - "{{ ansi_esc.format(ansi.fg.bright_green) }}{{ bash_esc.host }}" # Bright green host
       - "{{ ansi_esc.format(ansi.fg.bright_white) }}:"
-      - "{{ ansi_esc.format(ansi.fg.bright_blue) }} {{ bash_esc.cwd }} " # Bright blue directory
-      - "{{ ansi_esc.format(ansi.fg.bright_white) }}{{ unicode.vertical_line }}{{ bash_esc.newline }}"
+      - "{{ ansi_esc.format(ansi.fg.bright_blue) }}{{ bash_esc.cwd }}" # Bright blue directory
+      - "{{ ansi_esc.format(ansi.fg.bright_white) }}{{ unicode.vertical_line }}{{ bash_esc.prompt_symbol }}{{ bash_esc.newline }}"
 # Source Bash Files
       - "{{ unicode.upper_corner }}{{ unicode.horizontal_line }}"
       - "{{ unicode.horizontal_line }}{{ unicode.right_arrow }} {{ ansi_esc.format(ansi.style.reset) }}"
@@ -18,12 +19,13 @@ bash_prompts:
     parts:
       - "{{ ansi_esc.format([ansi.style.bold, ansi.style.italic, ansi.fg.bright_white] | join(';')) }}"
       - "{{ unicode.lower_corner }}{{ unicode.vertical_line }}"
+      - "{{ bash_esc.time_hm }}{{ unicode.vertical_line }}"
       - "{{ ansi_esc.format(ansi.fg.bright_cyan) }}{{ bash_esc.user }}" # Bright cyan user
       - "{{ ansi_esc.format(ansi.fg.bright_white) }}@"
       - "{{ ansi_esc.format(ansi.fg.bright_magenta) }}{{ bash_esc.host }}" # Bright magenta host
       - "{{ ansi_esc.format(ansi.fg.bright_white) }}:"
-      - "{{ ansi_esc.format(ansi.fg.bright_yellow) }} {{ bash_esc.cwd }} " # Bright yellow directory
-      - "{{ ansi_esc.format(ansi.fg.bright_white) }}{{ unicode.vertical_line }}{{ bash_esc.newline }}"
+      - "{{ ansi_esc.format(ansi.fg.bright_yellow) }}{{ bash_esc.cwd }}" # Bright yellow directory
+      - "{{ ansi_esc.format(ansi.fg.bright_white) }}{{ unicode.vertical_line }}{{ bash_esc.prompt_symbol }}{{ bash_esc.newline }}"
       - "{{ unicode.upper_corner }}{{ unicode.horizontal_line }}"
       - "{{ unicode.horizontal_line }}{{ unicode.right_arrow }} {{ ansi_esc.format(ansi.style.reset) }}"
 

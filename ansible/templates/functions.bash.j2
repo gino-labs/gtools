@@ -9,7 +9,7 @@ gitm() {
     git push
 }
 
-{% if install_extra_funcs %}
+{% if add_situational_functions %}
 # Monitor Brightness
 set-brightness() {
   sudo ddcutil --display 1 setvcp 10 "$1"

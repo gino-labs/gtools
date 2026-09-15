@@ -8,6 +8,7 @@ bash_esc:
   full_cwd: '\w'
   cwd: '\W'
   newline: '\n'
+  prompt_symbol: '\$'
 
 # Curly braces '{}' act as placeholder 
 ansi_esc: '\[\033[{}m\]'

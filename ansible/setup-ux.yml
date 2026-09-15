@@ -9,53 +9,66 @@
     - vars/bash_prompts.yml
     - vars/bash_aliases.yml
   vars:
-    install_extra_funcs: true
+    add_situational_functions: false
+    remove_old: false
   tasks:
     - name: Set facts about user
       set_fact:
         u:
           name: "{{ ansible_facts['user_id'] }}"
           home: "{{ ansible_facts['user_dir'] }}"
+
     - name: Create home .bashrc.d inclusion directory
       file:
         path: "{{ u.home }}/.bashrc.d"
         state: directory
         owner: "{{ u.name }}"
-        mode: 0700
     
-    - name: Add bashrc inclusion logic
+    - name: Add inclusion logic for custom bash files
       blockinfile:
         block: |
-          if [ -d ~/.bashrc.d ]; then
-              for rc in ~/.bashrc.d/*; do
-                  if [ -f "$rc" ]; then
-                      . "$rc"
-                  fi
-              done
-          fi
+          for x in ~/.bashrc.d/*.bash; do
+            . "$x"
+          done
         path: "{{ u.home }}/.bashrc"
         state: present
 
+    - name: Find old bashrc configs
+      find:
+        paths: "{{ u.home }}/.bashrc.d"
+        patterns: 'bash_*'
+        file_type: file
+      register: old_bash
+      when: remove_old | bool
+
+    - name: Remove old bashrc configs
+      file:
+        path: "{{ item.path }}"
+        state: absent
+      loop: "{{ old_bash.files }}"
+      when: remove_old | bool
                 
     - name: Add bashrc template files
       template:
         src: templates/{{ item }}.j2
         dest: "{{ u.home }}/.bashrc.d/{{ item }}"
+        backup: true
       loop:
-        - bash_prompt
-        - bash_aliases
-        - bash_functions
-        - bash_variables
+        - prompt.bash
+        - aliases.bash
+        - functions.bash
+        - variables.bash
 
     - name: Create nvim configuration base directory
       file:
-        path: "{{ u.name }}/.config/nvim"
+        path: "{{ u.home }}/.config/nvim"
         state: directory
 
     - name: Add vimrc template file
       template:
         src: templates/vimrc.j2
         dest: "{{ u.home }}/.vimrc"
+        backup: true
       loop:
         - "{{ u.home }}/.vimrc"
         - "{{ u.home }}/.config/nvim/init.vim"
