@@ -1,8 +1,14 @@
 # Safegaurd for non-interactive shells
 [[ $- != *i* ]] && return
 
-# Prompt Color Controls
-case $(( RANDOM % {{ bash_prompts | length }} + 1 )) in
+if [[ $TERM == linux ]]; then
+    CHOICE=0
+else
+    CHOICE=$(( RANDOM % {{ bash_prompts | length }} + 1 ))
+fi
+
+# Prompt Color Controls loop index starts at one
+case $CHOICE in
   {% for prompt in bash_prompts %}
   {{ loop.index }}) 
     SELECTED_PROMPT_NAME='{{ prompt.name }}'
@@ -10,8 +16,8 @@ case $(( RANDOM % {{ bash_prompts | length }} + 1 )) in
     ;;
   {% endfor %}
   *)
-    SELECTED_PROMPT_NAME='{{ bash_prompts[0]["name"] }}'
-    SELECTED_PROMPT_STRING='{{ bash_prompts[0]["parts"] | join('') }}'
+    SELECTED_PROMPT_NAME='{{ default_prompt["name"] }}'
+    SELECTED_PROMPT_STRING='{{ default_prompt["parts"] | join('') }}'
     ;;
     
 esac
