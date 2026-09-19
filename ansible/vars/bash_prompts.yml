@@ -29,3 +29,17 @@ bash_prompts:
       - "{{ unicode.upper_corner }}{{ unicode.horizontal_line }}"
       - "{{ unicode.horizontal_line }}{{ unicode.right_arrow }} {{ ansi_esc.format(ansi.style.reset) }}"
 
+
+# Virtual tty $TERM=linux
+default_prompt:
+  name: DEFAULT
+  parts:
+    - "{{ ansi_esc.format(ansi.fg.white) }}["
+    - "{{ ansi_esc.format(ansi.fg.cyan) }}{{ bash_esc.user }}" # Cyan user
+    - "{{ ansi_esc.format(ansi.fg.white) }}@"
+    - "{{ ansi_esc.format(ansi.fg.magenta) }}{{ bash_esc.host }}" # Magenta host
+    - "{{ ansi_esc.format(ansi.fg.white) }}:"
+    - "{{ ansi_esc.format(ansi.fg.yellow) }}{{ bash_esc.cwd }}" # Yellow directory
+    - "{{ ansi_esc.format(ansi.fg.white) }}]"
+    - "{{ bash_esc.prompt_symbol }} {{ ansi_esc.format(ansi.style.reset) }}"
+
