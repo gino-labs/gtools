@@ -3,7 +3,7 @@
 bash_prompts:
   - name: RGB
     parts:
-      - "{{ ansi_esc.format([ansi.style.bold, ansi.style.italic, ansi.fg.bright_white] | join(';')) }}"
+      - "{{ ansi_esc.format([ansi.style.bold, ansi.fg.bright_white] | join(';')) }}"
       - "{{ unicode.lower_corner }}{{ unicode.vertical_line }}"
       - "{{ bash_esc.time_hm }}{{ unicode.vertical_line }}"
       - "{{ ansi_esc.format(ansi.fg.bright_red) }}{{ bash_esc.user }}" # Bright red user
@@ -17,7 +17,7 @@ bash_prompts:
       - "{{ unicode.horizontal_line }}{{ unicode.right_arrow }} {{ ansi_esc.format(ansi.style.reset) }}"
   - name: CMY
     parts:
-      - "{{ ansi_esc.format([ansi.style.bold, ansi.style.italic, ansi.fg.bright_white] | join(';')) }}"
+      - "{{ ansi_esc.format([ansi.style.bold, ansi.fg.bright_white] | join(';')) }}"
       - "{{ unicode.lower_corner }}{{ unicode.vertical_line }}"
       - "{{ bash_esc.time_hm }}{{ unicode.vertical_line }}"
       - "{{ ansi_esc.format(ansi.fg.bright_cyan) }}{{ bash_esc.user }}" # Bright cyan user
